@@ -17,6 +17,10 @@ namespace pj050517
         private short[] output;
         private List<byte> _output = new List<byte>();
 
+        public Boolean chgBpm = false;
+        public Boolean staticBpm = false;
+        public int newBpm = 0;
+
         public void LoadSamples(int count)
         {
             for(int i = 0; i < count; i++)
@@ -27,46 +31,48 @@ namespace pj050517
             }
         }
 
-        /*public void Make()
+        public int getBpm()
         {
-            foreach (int n in name)
+            if (time.Count() > 1)
             {
-                for (int i = 0; i < samples[n].Length; i++)
-                {
-                    byte[] tmp = BitConverter.GetBytes(samples[n][i]);
-                    _output.Add(tmp[7]);
-                    _output.Add(tmp[6]);
-                }
-            }
-            WaveFormat waveFormat = new WaveFormat(44100, 16, 1);
-            using (WaveFileWriter writer = new WaveFileWriter("out.wav", waveFormat))
-            {
-                writer.Write(_output.ToArray(), 0, _output.ToArray().Length);
-            }
-        }*/
+                int bpm =(int)(60/(time[1]-time[0]));
 
+                for (int i = 2; i < time.Count() - 1; i++)
+                {
+                    bpm = (int)((60 / (time[i + 1] - time[i]))+bpm)/2;
+                }
+
+                return bpm;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public void Make()
         {
+            float coef = chgBpm ? newBpm / getBpm() : 1.0f;
 
-            output = new short[sampletime.Last()+samples[name.Last()].Count()]; //задает длинну - номер семпла последнего распознаного семпла+длинна этого семпла
-            for(int j = 0; j < sampletime.Count(); j++)
-            {
-                for(int i = 0; i < samples[name[j]].Length; i++)
+                output = new short[(int)(sampletime.Last()*coef) + samples[name.Last()].Count()]; //задает длинну - номер семпла последнего распознаного семпла+длинна этого семпла
+                for (int j = 0; j < sampletime.Count(); j++)
                 {
-                    output[sampletime[j] + i] = (short)(output[sampletime[j] + i] + samples[name[j]][i]);
+                    for (int i = 0; i < samples[name[j]].Length; i++)
+                    {
+                        if (output.Length - 1 < sampletime[j] + i) Array.Resize(ref output, output.Length + 1);
+                        output[(int)(sampletime[j]*coef) + i] = (short)(output[(int)(sampletime[j]*coef) + i] + samples[name[j]][i]);
+                    }
                 }
-            }
-            List<byte> op = new List<byte>();
-            foreach(short i in output)
-            {
-                op.Add((byte)(i / 256));
-                op.Add((byte)((i^255 << 8) / 256));
-            }
-            WaveFormat waveFormat = new WaveFormat(44100, 16, 1);
-            using (WaveFileWriter writer = new WaveFileWriter("out.wav", waveFormat))
-            {
-                writer.Write(op.ToArray(), 0, op.ToArray().Length);
-            }
+                List<byte> op = new List<byte>();
+                foreach (short i in output)
+                {
+                    op.Add((byte)(i / 256));
+                    op.Add((byte)((i ^ 255 << 8) / 256));
+                }
+                WaveFormat waveFormat = new WaveFormat(44100, 16, 1);
+                using (WaveFileWriter writer = new WaveFileWriter("out.wav", waveFormat))
+                {
+                    writer.Write(op.ToArray(), 0, op.ToArray().Length);
+                }
         }
 
         static int bytesToShort(byte firstByte, byte secondByte)

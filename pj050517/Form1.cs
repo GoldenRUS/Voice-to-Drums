@@ -114,8 +114,8 @@ namespace pj050517
 
         private void button1_Click(object sender, EventArgs e)
         {
+            output.Make();
 
-            
 
             //play
             play("out");
@@ -202,7 +202,22 @@ namespace pj050517
 
             //prepare to play
             output.LoadSamples(3);
-            output.Make();
+            
+            textBox2.Text = output.getBpm().ToString();
+
+            checkBox1.Enabled = true;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox2.ReadOnly = !checkBox1.Checked;
+            output.chgBpm = checkBox1.Checked;
+            output.newBpm = Convert.ToInt32(textBox2.Text);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            output.newBpm = Convert.ToInt32(textBox2.Text);
         }
     }
 }
