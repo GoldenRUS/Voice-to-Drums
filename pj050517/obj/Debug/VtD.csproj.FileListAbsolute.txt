@@ -1,0 +1,17 @@
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\0.dat
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\0.sp
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\1.dat
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\1.sp
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\2.dat
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\2.sp
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\pj050517.exe.config
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\pj050517.exe
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\pj050517.pdb
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\NAudio.dll
+C:\Users\Admin\Source\Repos\VtD\pj050517\bin\Debug\NAudio.xml
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\pj050517.Form1.resources
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\pj050517.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\VtD.csproj.GenerateResource.Cache
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\VtD.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\pj050517.exe
+C:\Users\Admin\Source\Repos\VtD\pj050517\obj\Debug\pj050517.pdb
